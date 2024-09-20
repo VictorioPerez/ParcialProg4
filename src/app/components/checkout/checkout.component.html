@@ -1,0 +1,104 @@
+<form #checkoutForm="ngForm" (ngSubmit)="onSubmit(checkoutForm)">
+  <div class="card my-3">
+    <h4 class="card-header text-center">Resumen Reserva</h4>
+    
+    <div class="card-body">
+      <!-- Información de Vuelo -->
+      <h5>Información Vuelo:</h5>
+      <div class="row">
+        <div class="col-4">
+          <img [src]="vuelo?.companyLogo" alt="Logo Empresa" class="img-fluid rounded" />
+        </div>
+        <div class="col-8">
+          <p><strong>{{ vuelo?.cityOrigin }} - {{ vuelo?.cityDestination }}</strong></p>
+          <p>Duración: {{ vuelo?.duration }}</p>
+          <p><strong>Hora Vuelo Ida:</strong> {{ vuelo?.from | date: 'shortTime' }} - {{ vuelo?.cityOrigin }}</p>
+          <p><strong>Hora Vuelo Vuelta:</strong> {{ vuelo?.to | date: 'shortTime' }} - {{ vuelo?.cityDestination }}</p>
+        </div>
+      </div>
+
+      <!-- Información de Habitación -->
+      <h5 class="mt-3">Información Habitación:</h5>
+      <div class="row">
+        <div class="col-4">
+          <img [src]="habitacion?.photo" alt="{{ habitacion?.type }}" class="img-fluid rounded" />
+        </div>
+        <div class="col-8">
+          <p><strong>Hotel:</strong> {{ habitacion?.hotel }}</p>
+          <p><strong>Tipo Habitación:</strong> {{ habitacion?.type }}</p>
+          <p><strong>Servicios:</strong></p>
+          <div class="d-flex">
+            @for (item of habitacion?.amenities; track $index) {
+            <div>
+              <i class="bi bi-{{ item | lowercase }} me-2"></i>
+            </div>
+          }
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario Información Personal -->
+      <h5 class="mt-3">Formulario Información Personal:</h5>
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+        <input type="text" id="nombre" class="form-control" maxlength="50" required ngModel name="nombre" />
+      </div>
+      <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido <span class="text-danger">*</span></label>
+        <input type="text" id="apellido" class="form-control" maxlength="50" required ngModel name="apellido" />
+      </div>
+      <div class="mb-3">
+        <label for="tipoDocumento" class="form-label">Tipo Documento <span class="text-danger">*</span></label>
+        <select id="tipoDocumento" class="form-select" required ngModel name="tipoDocumento">
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="dni">DNI</option>
+          <option value="pasaporte">Pasaporte</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="numeroDocumento" class="form-label">Número Documento <span class="text-danger">*</span></label>
+        <input type="number" id="numeroDocumento" class="form-control" required ngModel name="numeroDocumento" />
+      </div>
+      <div class="mb-3">
+        <label for="direccion" class="form-label">Dirección <span class="text-danger">*</span></label>
+        <input type="text" id="direccion" class="form-control" maxlength="500" required ngModel name="direccion" />
+      </div>
+      <div class="mb-3">
+        <label for="pais" class="form-label">País <span class="text-danger">*</span></label>
+        <input type="text" id="pais" class="form-control" maxlength="100" required ngModel name="pais" />
+      </div>
+      <div class="mb-3">
+        <label for="ciudad" class="form-label">Ciudad <span class="text-danger">*</span></label>
+        <input type="text" id="ciudad" class="form-control" maxlength="100" required ngModel name="ciudad" />
+      </div>
+
+      <!-- Formulario Pago Tarjeta -->
+      <h5 class="mt-3">Formulario Pago Tarjeta:</h5>
+      <div class="mb-3">
+        <label for="tipoTarjeta" class="form-label">Tipo Tarjeta</label>
+        <select id="tipoTarjeta" class="form-select" ngModel name="tipoTarjeta">
+          <option value="credito">Crédito</option>
+          <option value="debito">Débito</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="nombreTitular" class="form-label">Nombre Titular <span class="text-danger">*</span></label>
+        <input type="text" id="nombreTitular" class="form-control" maxlength="12" required ngModel name="nombreTitular" />
+      </div>
+      <div class="mb-3">
+        <label for="numeroTarjeta" class="form-label">Número Tarjeta <span class="text-danger">*</span></label>
+        <input type="text" id="numeroTarjeta" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" required ngModel name="numeroTarjeta" />
+      </div>
+      <div class="mb-3">
+        <label for="expiracion" class="form-label">Expiración <span class="text-danger">*</span></label>
+        <input type="text" id="expiracion" class="form-control" maxlength="4" required ngModel name="expiracion" />
+      </div>
+      <div class="mb-3">
+        <label for="ccv" class="form-label">CCV <span class="text-danger">*</span></label>
+        <input type="password" id="ccv" class="form-control" maxlength="3" required ngModel name="ccv" />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Confirmar Reserva</button>
+    </div>
+  </div>
+</form>

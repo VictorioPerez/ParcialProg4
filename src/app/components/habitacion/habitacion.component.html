@@ -1,0 +1,14 @@
+<div class="containerStyle">
+    @for (room of hotel; track $index) {
+    <div class="card m-2">
+      <img src="{{ room.photo }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h2>{{ room.hotel | uppercase }} - {{ room.amenities }}</h2>
+        <p>{{ room.description }}</p>
+        <span> reviews: {{ room.reviews }} </span>
+      </div>
+      <button (click)="selectedRoom(room)">Select</button>
+    </div>
+    }
+  </div>
+  <app-checkout *ngIf="showCheckout"></app-checkout>

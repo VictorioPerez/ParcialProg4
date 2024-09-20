@@ -1,0 +1,23 @@
+<div class="containerStyle">
+    @for (info of vuelos; track $index) {
+    <div class="card m-2">
+      <img src="{{ info.companyLogo }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <p>{{ info.cityDestination }}</p>
+        <span>{{ info.countryDestination }} </span>
+        <p>${{ info.price }}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          {{ info.from | date : "MMMM d, y, h:mm a" }}
+        </li>
+        <li class="list-group-item">
+          {{ info.to | date : "MMMM d, y, h:mm a" }}
+        </li>
+        <button href="#" class="btn btn-primary m-3" (click)="selectedFlight(vuelos[$index])">IR</button>
+      </ul>
+    </div>
+    }
+  </div>
+
+  <app-habitacion *ngIf="showHabitaciones"></app-habitacion>  
